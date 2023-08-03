@@ -12,5 +12,10 @@
 <p>Harga : {{ $product->price }}</p>
 <p>Stok : {{ $product->stock }}</p>
 <img src="{{ url('storage/'.$product->image) }}" alt="{{ $product->name }}" height="150px">
+<form action="{{ route('add_to_cart', $product) }}" method="post">
+  @csrf
+  <input type="number" name="amount" value=1>
+  <button type="submit">Masukan ke Keranjang</button>
+</form>
 </body>
 </html>
