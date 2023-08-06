@@ -37,6 +37,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/products/delete/{product}', [productController::class, 'destroy'])->name('product.delete');
 
     Route::post('/cart/{product}', [CartController::class, 'add_to_cart'])->name('add_to_cart');
+    Route::get('/cart', [CartController::class, 'show'])->name('show_cart');
+    Route::patch('/cart/{$cart}', [CartController::class, 'edit'])->name('edit_cart');
 });
 
 require __DIR__.'/auth.php';
