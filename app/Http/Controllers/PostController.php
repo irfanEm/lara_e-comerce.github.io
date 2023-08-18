@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StorePostRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -20,15 +21,19 @@ class PostController extends Controller
     /**
      * menyimpan post blog baru.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(StorePostRequest $request): RedirectResponse
     {
-        //validasi dan simpan post blog
-        $request->validate([
-            'title' => 'required|unique:posts|max:255',
-            'body' => 'required',
-            'publish_at' => 'nullable|date',
-        ]);
+        //request yang valid masuk
 
+        //mengambil data input yang valid
+        $validated = $request->validated();
+
+        //mengambil bagian dari data input yang divalidasi
+        $validated = $request->safe()->only(['name', 'email']);
+        $validated = $request->safe()->except(['name', 'email']);
+
+        // simpan post blog
+        return redirect('/post');
         //blog valid..
         return redirect('/posts');
         $title = $request->old('title');
