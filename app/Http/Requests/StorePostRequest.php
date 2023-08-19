@@ -4,6 +4,8 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Validator;
+use App\Models\Comment;
+
 
 class StorePostRequest extends FormRequest
 {
@@ -25,14 +27,20 @@ class StorePostRequest extends FormRequest
     /**
      * Determine if the user is authorized to make this request.
      */
-    public function authorize(): bool
+    // public function authorize(): bool
+    // {
+    //     return true;
+    // }
+    /**
+     * Menentukan apakah user ini memiliki otorisasi untuk melakukan request ini.
+     */
+    public function authorize(): bool 
     {
-        return false;
+        $comment = Comment::find($this->route('comment'));
+        return $this->user()->can('update', $this->comment);
     }
-
     /**
      * Get the validation rules that apply to the request.
-     *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
      */
     public function rules(): array

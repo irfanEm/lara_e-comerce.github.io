@@ -44,6 +44,7 @@ Route::middleware('auth')->group(function () {
     //belajar laravel - Validasi
     Route::get('/post/create', [PostController::class, 'create'])->name('create_post');
     Route::post('/post', [PostController::class, 'store'])->name('store_post');
+    Route::get('/comment/{comment}');
 });
 
 require __DIR__.'/auth.php';
