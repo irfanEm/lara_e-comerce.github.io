@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Validator;
 use App\Models\Comment;
+use Illuminate\Support\Str;
+use Illuminate\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest;
 
 
 class StorePostRequest extends FormRequest
@@ -36,7 +37,7 @@ class StorePostRequest extends FormRequest
      */
     public function authorize(): bool 
     {
-        $comment = Comment::find($this->route('comment'));
+        // $comment = Comment::find($this->route('comment'));
         return $this->user()->can('update', $this->comment);
     }
     /**
@@ -66,5 +67,49 @@ class StorePostRequest extends FormRequest
                 }
             }
         ];
+    }
+
+    /**
+     * Dapatkan pesan error untuk rules validasi yang didefinisikan
+     * 
+     * @return array<string, string>
+     */
+    
+    public function messages(): array
+    {
+        return [
+            'title.required' => 'Judul dibutuhkan',
+            'post.required' => 'Post dibutuhkan'
+        ];
+    }
+
+    /**
+     * Dapatkan attribute custom untuk error validasi
+     * 
+     * @return array <string, string>
+     */
+    public function attributes(): array
+    {
+        return [
+            'email' => 'alamat email',
+        ];
+    }
+
+    /**
+     * Persiapkan data untuk validasi
+     */
+    protected function prepareForValidation(): void
+    {
+        $this->merger([
+            'slug' => Str::slug($this->slug),
+        ]);
+    }
+
+    /**
+     * menangani usaha validasi yang gagal
+     */
+    protected function passedValidation(): void
+    {
+        $this->replace(['name' => 'Taylor']);
     }
 }
