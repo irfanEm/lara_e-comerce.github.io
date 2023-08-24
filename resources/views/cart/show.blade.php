@@ -7,6 +7,11 @@
     <title>Keranjang</title>
 </head>
 <body>
+    @if($errors->any())
+    @foreach($errors->all() as $error)
+        <p>{{ $error }}</p>
+    @endforeach
+    @endif
     @foreach($carts as $cart)
       <img src="{{ url('storage/'.$cart->product->image) }}" alt="{{ $cart->product }}" height="100px">
       <p>Nama : {{ $cart->product->name }}</p>

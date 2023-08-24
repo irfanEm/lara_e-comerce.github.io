@@ -13,10 +13,10 @@ class CartController extends Controller
     public function __construct() {
         $this->middleware('auth');
     }
-    public function add_to_cart(Product $product, Request $request)
+    public function add_to_cart(Product $product, Request $request, Cart $cart)
     {
       $request->validate([
-        'amount' => 'required | gte:1',
+        'amount' => 'required | gte:1 | lte:'.$cart->product->stock,
       ]);
 
       $user_id = Auth::id();
@@ -41,7 +41,7 @@ class CartController extends Controller
     public function edit(Cart $cart, Request $request)
     {
         $request->validate([
-            'amount' => 'required | gte:1 | lte:'.$cart->product->stock
+            'amount' => 'required|gte:1|lte:'.$cart->product->stock
         ]);
         $cart->update([
             'amount' => $request->amount
