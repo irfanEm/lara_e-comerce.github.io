@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\productController;
 use App\Http\Controllers\ProfileController;
 
@@ -38,7 +39,16 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/cart/{product}', [CartController::class, 'add_to_cart'])->name('add_to_cart');
     Route::get('/cart', [CartController::class, 'show'])->name('show_cart');
+<<<<<<< HEAD
     Route::patch('/cart/{cart}', [CartController::class, 'edit'])->name('edit_cart');
+=======
+    Route::patch('/cart/{$cart}', [CartController::class, 'edit'])->name('edit_cart');
+
+    //belajar laravel - Validasi
+    Route::get('/post/create', [PostController::class, 'create'])->name('create_post');
+    Route::post('/post', [PostController::class, 'store'])->name('store_post');
+    Route::get('/comment/{comment}');
+>>>>>>> ae6234516f0570db932941c5ca068721b2dfe5d3
 });
 
 require __DIR__.'/auth.php';
