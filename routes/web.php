@@ -40,7 +40,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/cart/{product}', [CartController::class, 'add_to_cart'])->name('add_to_cart');
     Route::get('/cart', [CartController::class, 'show'])->name('show_cart');
     Route::patch('/cart/{cart}', [CartController::class, 'edit'])->name('edit_cart');
-    Route::patch('/cart/{$cart}', [CartController::class, 'edit'])->name('edit_cart');
+    Route::patch('/cart/{cart}', [CartController::class, 'edit'])->name('edit_cart');
+    Route::delete('/cart/{cart}', [CartController::class, 'hapus'])->name('hapus_cart');
 
     //belajar laravel - Validasi
     Route::get('/post/create', [PostController::class, 'create'])->name('create_post');

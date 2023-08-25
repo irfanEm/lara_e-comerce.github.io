@@ -22,6 +22,11 @@
         <input type="number" name="amount" value={{ $cart->amount }}>
         <button type="submit">edit keranjang</button>
       </form>
+      <form action="{{ route('hapus_cart', $cart) }}" method="post">
+          @method('delete')
+          @csrf
+          <button type="submit">hapus</button>
+      </form>
     @endforeach
 </body>
 </html>

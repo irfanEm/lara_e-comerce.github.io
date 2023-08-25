@@ -49,4 +49,9 @@ class CartController extends Controller
 
         return Redirect::route('show_cart');
     }
+
+    public function hapus(Cart $cart) {
+        $cart->delete();
+        return Redirect::back();
+    }
 }
