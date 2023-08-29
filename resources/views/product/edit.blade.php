@@ -8,8 +8,8 @@
 </head>
 <body>
     <form action="{{ route('product.update', $product) }}" method="post" enctype="multipart/form-data">
-        @csrf
         @method('patch')
+        @csrf
         <input type="text" name="name" id="name" placeholder="Nama" value="{{ $product->name }}"><br>
         <input type="text" name="description" id="description" placeholder="Deskripsi" value="{{ $product->description }}"><br>
         <input type="number" name="price" id="price" placeholder="price" value="{{ $product->price }}"><br>

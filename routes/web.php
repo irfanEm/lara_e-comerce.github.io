@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\productController;
 use App\Http\Controllers\ProfileController;
 
@@ -42,6 +43,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/cart/{cart}', [CartController::class, 'edit'])->name('edit_cart');
     Route::patch('/cart/{cart}', [CartController::class, 'edit'])->name('edit_cart');
     Route::delete('/cart/{cart}', [CartController::class, 'hapus'])->name('hapus_cart');
+    Route::post('/checkout', [OrderController::class, 'checkout'])->name('checkout');
 
     //belajar laravel - Validasi
     Route::get('/post/create', [PostController::class, 'create'])->name('create_post');

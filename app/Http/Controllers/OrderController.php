@@ -30,7 +30,7 @@ class OrderController extends Controller
             $product = Product::find($cart->product_id);
 
             $product->update([
-                'amount' => $product->amount - $cart->amount,
+                'stock' => $product->stock - $cart->amount,
             ]);
             Transaction::create([
                 'amount' => $cart->amount,

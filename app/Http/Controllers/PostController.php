@@ -41,7 +41,7 @@ class PostController extends Controller
 
         return redirect('register')->withErrors($validator, 'login');
 
-        {{ $errors->login->first('email') }}
+        // {{ $errors->login->first('email'); }}
 
         // simpan post blog
         return redirect('/post');

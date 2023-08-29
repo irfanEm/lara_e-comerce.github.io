@@ -27,6 +27,10 @@
           @csrf
           <button type="submit">hapus</button>
       </form>
+      <form action="{{ route('checkout') }}" method="post">
+        @csrf
+        <button type="submit">checkout</button>
+      </form>
     @endforeach
 </body>
 </html>

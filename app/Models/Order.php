@@ -14,7 +14,7 @@ class Order extends Model
     protected $fillable = [
         'is_paid',
         'payment_receipt',
-        'product_id',
+        'user_id',
     ];
     public function user()
     {
