@@ -32,6 +32,15 @@ class PostController extends Controller
         $validated = $request->safe()->only(['name', 'email']);
         $validated = $request->safe()->except(['name', 'email']);
 
+        Validator::make($request->all(), [
+            'title' => 'required|unique:posts|max:255',
+            'body' => 'required',
+        ])->validateWithBag('post');
+
+        return redirect('register')->withErrors($validator, 'login');
+
+        {{ $errors->login->first('email') }}
+
         // simpan post blog
         return redirect('/post');
         //blog valid..
