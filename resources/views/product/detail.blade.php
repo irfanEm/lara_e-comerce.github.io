@@ -17,5 +17,10 @@
     <input type="number" name="amount" value=1>
     <button type="submit">Masukan ke Keranjang</button>
   </form>
+  @if($errors->any())
+  @foreach($errors->all() as $error)
+      <p>{{ $error }}</p>
+  @endforeach
+  @endif
 </body>
 </html>

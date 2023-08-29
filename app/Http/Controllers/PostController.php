@@ -3,27 +3,29 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StorePostRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
+use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
 {
     /**
-     * menampilkan form untuk membuat post blog baru.
-     */
-    public function create(): View
-    {
-        return view('post.create');
-    }
-
-    /**
      * menyimpan post blog baru.
      */
-    public function store(StorePostRequest $request): RedirectResponse
+    public function store(Request $request): RedirectResponse
     {
-        //request yang valid masuk
+        $validator = Validator::make($request->all(),
+        [
+            'title' => 'required|unique|max:255',
+            'body' => 'required',
+        ]);
+
+        if($validator->fails())
+        {
+            return redirect('post/create')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
 
         //mengambil data input yang valid
         $validated = $request->validated();
@@ -43,11 +45,5 @@ class PostController extends Controller
 
         // simpan post blog
         return redirect('/post');
-        //blog valid..
-        return redirect('/posts');
-        $title = $request->old('title');
-        // $post = /**... */
-
-        // return to_route('post.show', ['post' => $post->id]);
     }
 }
